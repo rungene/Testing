@@ -61,6 +61,8 @@ dependencies {
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:$junitVersion"
+    // Other dependencies
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
 
     // AndroidX Test - Instrumented testing
     androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
