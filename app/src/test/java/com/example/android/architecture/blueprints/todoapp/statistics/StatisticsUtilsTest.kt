@@ -17,10 +17,10 @@ class StatisticsUtilsTest{
         val tasks = listOf<Task>(
                 Task("title", "desc", isCompleted = false)
         )
-        // Call our function
+        // Call our function.When the list of tasks is computed with a completed task
         val result = getActiveAndCompletedStats(tasks)
 
-        // Check the result
+        // Check the result.Then the percentages are 0 and 100
         assertEquals(0f,result.completedTasksPercent)
         assertEquals(100f, result.activeTasksPercent)
     }
@@ -30,9 +30,7 @@ class StatisticsUtilsTest{
 
     @Test
     fun getActiveAndCompletedStats_both_returnsFortySixty() {
-
-
-        // Create an active tasks (the false makes this active)
+        // Given 3 completed tasks and 2 active tasks
         val tasks = listOf<Task>(
                 Task("title", "desc", isCompleted = true),
                 Task("title", "desc", isCompleted = true),
@@ -42,12 +40,36 @@ class StatisticsUtilsTest{
 
 
         )
-        // Call our function
+        // When the list of tasks is computed
+        val result = getActiveAndCompletedStats(tasks)
+
+        // Check the result- Then the result is 40-60
+        assertEquals(40f, result.completedTasksPercent)
+        assertEquals(60f, result.activeTasksPercent)
+    }
+
+    @Test
+    fun getActiveAndCompletedStats_empty_returnsZeros() {
+
+        val tasks = emptyList<Task>()
+        // When there are no tasks
         val result = getActiveAndCompletedStats(tasks)
 
         // Check the result
-        assertEquals(40f, result.completedTasksPercent)
-        assertEquals(60f, result.activeTasksPercent)
+        assertEquals(0f,result.completedTasksPercent)
+        assertEquals(0f, result.activeTasksPercent)
+    }
+
+    @Test
+    fun getActiveAndCompletedStats_error_returnsZeros() {
+
+        val tasks = null
+        // When there's an error loading stats
+        val result = getActiveAndCompletedStats(tasks)
+
+        // Both active and completed tasks are 0
+        assertEquals(0f,result.completedTasksPercent)
+        assertEquals(0f, result.activeTasksPercent)
     }
 
 }
