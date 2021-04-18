@@ -3,8 +3,7 @@ package com.example.android.architecture.blueprints.todoapp.tasks
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.hamcrest.CoreMatchers.not
-import org.hamcrest.CoreMatchers.nullValue
+import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
@@ -34,5 +33,19 @@ class TasksViewModelTest{
         assertThat(value.getContentIfNotHandled(), (not(nullValue())))
 
     }
+    @Test
+    fun setFilterAllTasks_tasksAddViewVisible() {
+//You create your tasksViewModel using the same AndroidX ApplicationProvider.getApplicationContext() statement
+        // Given a fresh ViewModel
+        val taskViewModel_ =TasksViewModel(ApplicationProvider.getApplicationContext())
+//You call the setFiltering method, passing in the ALL_TASKS filter type enum
+        // When the filter type is ALL_TASKS
+        taskViewModel_.setFiltering(TasksFilterType.ALL_TASKS)
+//You check that the tasksAddViewVisible is true, using the getOrAwaitNextValue method
+        // Then the "Add task" action is visible
+        assertThat(taskViewModel_.tasksAddViewVisible.getOrAwaitValue(), `is`(true))
+
+    }
+
 
 }
