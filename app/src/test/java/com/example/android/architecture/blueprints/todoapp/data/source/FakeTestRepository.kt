@@ -20,7 +20,7 @@ var tasksServiceData: LinkedHashMap<String, Task> = LinkedHashMap()
     }
 
     override suspend fun refreshTasks() {
-        TODO("Not yet implemented")
+        observableTasks.value = getTasks()
     }
     //observeTasks - Create a coroutine using runBlocking and run refreshTasks, then return
 // observableTasks.
@@ -30,7 +30,7 @@ var tasksServiceData: LinkedHashMap<String, Task> = LinkedHashMap()
     }
 //Updates the value of observableTasks to be what is returned by getTasks().
     override suspend fun refreshTask(taskId: String) {
-     observableTasks.value = getTasks()
+    TODO("Not yet implemented")
     }
 
     override fun observeTask(taskId: String): LiveData<Result<Task>> {
