@@ -42,7 +42,8 @@ class TaskDetailFragment : Fragment() {
     private lateinit var viewDataBinding: TaskdetailFragBinding
 
     private val viewModel by viewModels<TaskDetailViewModel>{
-        TaskDetailViewModel.TaskDetailViewModelFactory(DefaultTasksRepository.getRepository(requireActivity().application))
+        TaskDetailViewModel.TaskDetailViewModelFactory(DefaultTasksRepository.
+        getRepository(requireActivity().application))
     }
 
     private val args: TaskDetailFragmentArgs by navArgs()

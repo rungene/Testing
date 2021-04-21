@@ -34,7 +34,6 @@ import kotlinx.coroutines.launch
 class TaskDetailViewModel(private val tasksRepository: TasksRepository) : ViewModel() {
 
 
-
     private val _taskId = MutableLiveData<String>()
 
     private val _task = _taskId.switchMap { taskId ->
