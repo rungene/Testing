@@ -22,8 +22,7 @@ class TaskDetailFragmentTest{
         val bundle = TaskDetailFragmentArgs(activeTask.id).toBundle()
 //The launchFragmentInContainer function creates a FragmentScenario, with this bundle and a theme.
         launchFragmentInContainer<TaskDetailFragment>(bundle, R.style.AppTheme)
-      //  Thread.sleep(2000)
-
+        Thread.sleep(2000)
     }
 
 }
