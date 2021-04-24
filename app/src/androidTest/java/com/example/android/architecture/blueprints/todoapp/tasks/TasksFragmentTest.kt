@@ -1,10 +1,12 @@
 package com.example.android.architecture.blueprints.todoapp.tasks
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -73,6 +75,37 @@ class TasksFragmentTest {
                 TasksFragmentDirections.actionTasksFragmentToTaskDetailFragment( "id1"))
 
 
+
+
+
     }
+
+    @Test
+    fun clickAddTaskButton_navigateToAddEditFragment() {
+       //Given -on the home screen
+        val scenario = launchFragmentInContainer<TasksFragment>(Bundle(), R.style.AppTheme)
+        //  Use Mockito's mock function to create a mock:
+        val navController = mock(NavController::class.java)
+
+        //Make your new mock the fragment's NavController:
+        scenario.onFragment {
+            Navigation.setViewNavController(it.view!!, navController)
+        }
+
+        // WHEN - Click on the "+" button
+        onView(withId(R.id.add_task_fab)).perform(click())
+
+
+
+        // THEN - Verify that we navigate to the add screen
+        verify(navController).navigate(
+                TasksFragmentDirections.actionTasksFragmentToAddEditTaskFragment(
+                        null, getApplicationContext<Context>().getString(R.string.add_task)
+                )
+        )
+
+    }
+
+
 
 }
