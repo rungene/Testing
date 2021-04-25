@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.architecture.blueprints.todoapp.Event
+import com.example.android.architecture.blueprints.todoapp.MainCoroutineRule
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.data.Task
 import com.example.android.architecture.blueprints.todoapp.data.source.FakeDataSource
@@ -25,21 +26,8 @@ import org.junit.runner.RunWith
 @ExperimentalCoroutinesApi
 class TasksViewModelTest{
 
-   // Replace Dispatcher.Main with TestCoroutineDispatcher
-   val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
-    //called before every test.
-    @Before
-    fun setupDispatcher() {
-        Dispatchers.setMain(testDispatcher)
-    }
-//method that cleans everything up after running each test
-    @After
-    fun tearDownDispatcher() {
-        Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
-    }
-
-
+    @get:Rule
+    var mainCoroutineRule=MainCoroutineRule()
     private lateinit var tasksRepository: FakeTestRepository
 
     // Subject under test
